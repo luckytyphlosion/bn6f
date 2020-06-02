@@ -13126,7 +13126,7 @@ int sub_802F756()
     else
     {
         sub_800260C();
-        reqBBS_init_8004DF0();
+        newGame_8004df0();
         sub_8004D48();
         sub_81440D8();
         sub_8149644();

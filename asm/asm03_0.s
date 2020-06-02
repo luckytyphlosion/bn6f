@@ -18213,7 +18213,7 @@ sub_802F756:
 	b loc_802F7B6
 loc_802F776:
 	bl sub_800260C
-	bl reqBBS_init_8004DF0
+	bl newGame_8004df0
 	bl sub_8004D48
 	bl sub_81440D8 // static () -> void
 	bl sub_8149644

@@ -1119,7 +1119,7 @@ NPCCommandsJumptable:
 	.word NPCCommand_do_camera_shake+1                                // 0x4a
 	.word NPCCommand_jump_if_anim_not_equal+1                         // 0x4b
 	.word NPCCommand_set_text_script_index_and_ptr_to_decomp_buffer+1 // 0x4c
-	.word NPCCommand_jump_alt+1                                       // 0x4d
+	.word NPCCommand_jump_based_on_version+1                                       // 0x4d
 	.word NPCCommand_init_leap+1                                      // 0x4e
 	.word NPCCommand_init_vertical_movement+1                         // 0x4f
 	.word NPCCommand_init_diagonal_leap+1                             // 0x50
@@ -2539,12 +2539,14 @@ off_809F3E0: .word off_realWorld_8044470
 	thumb_func_end NPCCommand_set_text_script_index_and_ptr_to_decomp_buffer
 
 	thumb_local_start
-// 0x4d unused1to4 destination5
-// jump to another script
-// the code suggests something was removed
-// unused1to4 - unused
-// destination5 - script to jump to
-NPCCommand_jump_alt:
+// 0x4d destination1 destination5
+// in gregar version: jump to destination1
+// in falzar version: jump to destination5
+// the jump is hardcoded in the code
+// in gregar version, it is `add r0, r6, #1` instead
+// destination1 - gregar script to jump to
+// destination5 - falzar script to jump to
+NPCCommand_jump_based_on_version:
 	push {lr}
 	add r0, r6, #5
 	bl ReadNPCScriptWord // (void* a1) -> int
@@ -2552,7 +2554,7 @@ NPCCommand_jump_alt:
 	b .dummy
 .dummy
 	pop {pc}
-	thumb_func_end NPCCommand_jump_alt
+	thumb_func_end NPCCommand_jump_based_on_version
 
 	thumb_local_start
 // 0x4e byte1 byte2 byte3 byte4

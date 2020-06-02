@@ -1623,7 +1623,7 @@ char *NPCCommand_set_text_script_index_and_ptr_to_decomp_buffer()
 
 
 // 0x809f3e8
-int NPCCommand_jump_alt()
+int NPCCommand_jump_version_dependent()
 {
     int v0; // r6
 

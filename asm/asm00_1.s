@@ -3527,8 +3527,8 @@ off_8004DE8: .word eCamera+0x4C // eCamera.unk_4C
 off_8004DEC: .word dword_20096D0
 	thumb_func_end sub_8004D48
 
-	thumb_func_start reqBBS_init_8004DF0
-reqBBS_init_8004DF0:
+	thumb_func_start newGame_8004df0
+newGame_8004df0:
 	push {r4-r7,lr}
 	mov r5, r10
 	ldr r5, [r5,#oToolkit_GameStatePtr]
@@ -3711,7 +3711,7 @@ reqBBS_init_8004DF0:
 	ldr r0, off_80050E4 // =0x100
 	strh r0, [r5,#oGameState_MapGroup]
 	str r0, [r5,#oGameState_SavedRealWorldMapId]
-	str r0, [r5,#0x58]
+	str r0, [r5,#oGameState_SavedInternetMapId]
 	mov r0, #0
 	strb r0, [r5,#oGameState_GameProgress]
 	strb r0, [r5,#oGameState_Unk_07]
@@ -3722,14 +3722,14 @@ reqBBS_init_8004DF0:
 	str r0, [r5,#oGameState_SavedInternetX]
 	str r0, [r5,#oGameState_PlayerY]
 	str r0, [r5,#oGameState_SavedRealWorldY]
-	str r0, [r5,#0x4c]
+	str r0, [r5,#oGameState_SavedInternetY]
 	str r0, [r5,#oGameState_PlayerZ]
 	str r0, [r5,#oGameState_SavedRealWorldZ]
-	str r0, [r5,#0x50]
+	str r0, [r5,#oGameState_SavedInternetZ]
 	mov r0, #4
 	str r0, [r5,#oGameState_FacingDirectionAfterWarp]
 	str r0, [r5,#oGameState_SavedRealWorldFacingDirection]
-	str r0, [r5,#0x54]
+	str r0, [r5,#oGameState_SavedInternetFacingDirection]
 	bl initGameProgressBuffer_803532c
 	bl sub_8021D36
 	mov r0, r10
@@ -3770,7 +3770,7 @@ reqBBS_init_8004DF0:
 	.balign 4, 0
 off_80050E4: .word 0x100
 off_80050E8: .word byte_80213AC
-	thumb_func_end reqBBS_init_8004DF0
+	thumb_func_end newGame_8004df0
 
 // () -> void
 	thumb_func_start cbGameState_80050EC

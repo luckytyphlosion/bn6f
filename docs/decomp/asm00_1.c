@@ -2044,7 +2044,7 @@ char *sub_8004D48()
 
 
 // 0x8004df0
-void __cdecl reqBBS_init_8004DF0()
+void __cdecl newGame_8004df0()
 {
     int v0; // r2
     int v1; // r3
