@@ -32357,7 +32357,7 @@ sub_811FCB8:
 	str r5, [sp,#0xc]
 	str r3, [sp,#0x14]
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	mov r2, #0x3c
 	mul r0, r2
 	add r7, r7, r0
@@ -32494,7 +32494,7 @@ sub_811FDB8:
 	ble loc_811FE22
 	mov r5, #0
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	str r7, [sp,#8]
 	str r7, [sp,#0x10]
 loc_811FDD2:
@@ -33747,7 +33747,7 @@ sub_81206F8:
 	sub sp, sp, #4
 	mov r4, r0
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	mov r2, #0x3c
 	mul r1, r2
 	add r7, r7, r1
@@ -33796,7 +33796,7 @@ sub_8120740:
 	mov r5, #0
 loc_8120752:
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	str r7, [sp,#8]
 	cmp r4, r5
 	beq loc_81207A2
@@ -34235,7 +34235,7 @@ sub_8120A88:
 	ldrb r4, [r0,#5]
 loc_8120A90:
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	mov r2, #0x3c
 	sub r0, r4, #1
 	mul r0, r2
@@ -34263,7 +34263,7 @@ sub_8120AB8:
 	ldrb r4, [r0,#5]
 loc_8120AC0:
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	mov r2, #0x3c
 	sub r0, r4, #1
 	mul r0, r2
@@ -34294,7 +34294,7 @@ sub_8120AE8:
 	mov r1, #0x3c
 	mul r0, r1
 	mov r4, r10
-	ldr r4, [r4,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r4, [r4,#oToolkit_FoldersPtr]
 	add r4, r4, r0
 	mov r7, #0
 	mov r6, #0
@@ -34714,7 +34714,7 @@ loc_8120E56:
 	mov r0, r7
 	bl GetNaviStatsIndexFromCurPETNavi // (int idx) -> bool8
 	mov r1, r7
-	bl init_8013B4E // (bool a1, int a2) -> void
+	bl initNaviStatsWithDefault_8013b4e // (bool a1, int a2) -> void
 	mov r7, r4
 	mov r6, #0
 loc_8120E66:

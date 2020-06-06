@@ -532,7 +532,7 @@ loc_8099D58:
 	lsl r2, r2, #0x10
 	bl owPlayer_indirectlySetPlayerCoordsMaybe_809e1a4
 	mov r0, #0
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	mov r0, #0xe
 	mov r1, #0x10
 	mov r2, #0x12
@@ -560,7 +560,7 @@ sub_8099DAC:
 	ldr r1, [r1,#oToolkit_GameStatePtr]
 	ldr r1, [r1,#oGameState_OverworldPlayerObjectPtr]
 	add r1, #0x1c
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	mov r0, #0
 	pop {r4-r7,pc}
 	.balign 4, 0
@@ -2291,7 +2291,7 @@ loc_809AF4C:
 loc_809AF5A:
 	strb r4, [r5,#4]
 	mov r0, #0
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	ldr r0, [r7,#0x24]
 	ldr r1, [r7,#0x28]
 	ldr r3, [r7,#0x30]
@@ -2890,7 +2890,7 @@ loc_809B960:
 	strb r0, [r5,#9]
 	mov r0, #1
 	mov r1, r6
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	mov r0, #0
 	pop {r4-r7,pc}
 	.word byte_809B174
@@ -3161,7 +3161,7 @@ loc_809BDE6:
 loc_809BE4A:
 	mov r0, #1
 	mov r1, r6
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 loc_809BE52:
 	mov r3, r10
 	ldr r3, [r3,#0x3c]

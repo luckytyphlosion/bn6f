@@ -22293,8 +22293,8 @@ signed int __fastcall sub_811FCB8(int a1, int *a2, int a3, int a4)
     v5 = a2;
     v21 = a2;
     v23 = a4;
-    v6 = (*(v4 + oToolkit_S_Chip_2002178_Ptr) + 60 * a1);
-    v20 = *(v4 + oToolkit_S_Chip_2002178_Ptr) + 60 * a1;
+    v6 = (*(v4 + oToolkit_FoldersPtr) + 60 * a1);
+    v20 = *(v4 + oToolkit_FoldersPtr) + 60 * a1;
     sub_811FE34(a2, a2, 60, a4);
     ZeroFillByEightWords(v23, 120);
     do
@@ -22366,7 +22366,7 @@ signed int __fastcall sub_811FDB8(int a1)
     if ( v3 <= 1 )
         return 0;
     v4 = 0;
-    v14 = *(v1 + oToolkit_S_Chip_2002178_Ptr);
+    v14 = *(v1 + oToolkit_FoldersPtr);
     while ( v2 == v4 )
     {
 LABEL_11:
@@ -23301,7 +23301,7 @@ int __fastcall sub_81206F8(int a1, int a2)
     int v9; // [sp+0h] [bp-18h]
 
     v4 = a1;
-    v5 = (*(v3 + oToolkit_S_Chip_2002178_Ptr) + 60 * a2);
+    v5 = (*(v3 + oToolkit_FoldersPtr) + 60 * a2);
     v9 = a1 + 960;
     do
     {
@@ -23347,7 +23347,7 @@ signed int __fastcall sub_8120740(int a1)
     v4 = 0;
     while ( 1 )
     {
-        v14 = *(v1 + oToolkit_S_Chip_2002178_Ptr);
+        v14 = *(v1 + oToolkit_FoldersPtr);
         if ( v2 != v4 )
             break;
 LABEL_11:
@@ -23643,7 +23643,7 @@ signed int sub_8120A88()
     v1 = *(*(v0 + oToolkit_Unk2001c04_Ptr) + 5);
     do
     {
-        v2 = *(v0 + oToolkit_S_Chip_2002178_Ptr) + 60 * (v1 - 1);
+        v2 = *(v0 + oToolkit_FoldersPtr) + 60 * (v1 - 1);
         v3 = 0;
         do
         {
@@ -23674,7 +23674,7 @@ int sub_8120AB8()
     v1 = *(*(v0 + oToolkit_Unk2001c04_Ptr) + 5);
     do
     {
-        v2 = *(v0 + oToolkit_S_Chip_2002178_Ptr) + 60 * (v1 - 1);
+        v2 = *(v0 + oToolkit_FoldersPtr) + 60 * (v1 - 1);
         v3 = 0;
         do
         {
@@ -23703,7 +23703,7 @@ int __fastcall sub_8120AE8(int a1)
 
     v8 = a1;
     v2 = getPETNaviSelect();
-    v3 = *(v1 + oToolkit_S_Chip_2002178_Ptr) + 60 * GetCurPETNaviStatsByte(v2);
+    v3 = *(v1 + oToolkit_FoldersPtr) + 60 * GetCurPETNaviStatsByte(v2);
     v4 = 0;
     v5 = 0;
     do
@@ -23998,7 +23998,7 @@ int reloadCurNaviBaseStats_8120df0()
         }
     }
     SelectS20047CCStruct8014018(v6);
-    init_8013B4E();
+    initNaviStatsWithDefault_8013b4e();
     v12 = &v33;
     for ( k = 0; ; k += 4 )
     {

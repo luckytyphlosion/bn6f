@@ -1262,12 +1262,12 @@ signed int sub_812FC50()
             *(&unk_20018EC + v14) = 38;
             *(v13 + 5) = v14 + 1;
             v7 = 60 * v14;
-            v3 = *(v1 + oToolkit_S_Chip_2002178_Ptr) + 60 * v14;
+            v3 = *(v1 + oToolkit_FoldersPtr) + 60 * v14;
         }
         else
         {
             *(&unk_20018EC + v2) = 38;
-            v3 = *(v1 + oToolkit_S_Chip_2002178_Ptr) + 60 * v2;
+            v3 = *(v1 + oToolkit_FoldersPtr) + 60 * v2;
             v4 = 0;
             do
             {

@@ -6,7 +6,7 @@ void *__fastcall getChip8021DA8(int chipData)
 
 
 // 0x8021ab4
-int __fastcall sub_8021AB4(int a1, int a2)
+int __fastcall setFolder_8021ab4(int a1, int a2)
 {
     Toolkit *tk; // r10
     signed int v3; // r6
@@ -219,7 +219,7 @@ int __fastcall sub_8021C02(int a1, int a2)
     v4 = 0;
     do
     {
-        v5 = 60 * (*(&unk_20018EC + v3) >> 4) + *(v2 + oToolkit_S_Chip_2002178_Ptr);
+        v5 = 60 * (*(&unk_20018EC + v3) >> 4) + *(v2 + oToolkit_FoldersPtr);
         v6 = 0;
         do
         {

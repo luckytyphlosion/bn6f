@@ -80,7 +80,7 @@
 // byte1 - number of flags to test
 // hword2 - starting flag to test
 // destination4 - script to jump to
-	.macro ms_jump_if_flag_range_clear
+	.macro ms_jump_if_flag_range_clear byte1:req, hword2:req, destination4:req
 	.byte ms_jump_if_flag_range_clear_cmd
 	.byte \byte1
 	.hword \hword2

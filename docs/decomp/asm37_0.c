@@ -2470,7 +2470,7 @@ int sub_813CEA0()
     result = GetCurPETNaviStatsByte(0);
     if ( result != 255 )
     {
-        v5 = split9BitsFromBitfield_8021AE0(*(2 * result + 60 * v6 + *(v0 + oToolkit_S_Chip_2002178_Ptr)));
+        v5 = split9BitsFromBitfield_8021AE0(*(2 * result + 60 * v6 + *(v0 + oToolkit_FoldersPtr)));
         result = *(getChip8021DA8(v5) + 8);
         if ( result > v1 )
             result = SetCurPETNaviStatsByte(0, v3, 255);

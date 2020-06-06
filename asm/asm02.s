@@ -8,17 +8,19 @@ getChip8021DA8:
 	add r0, r0, r1
 	// return &u8_8021DA8[44*idx]
 	mov pc, lr
-	.byte 0, 0
+	.balign 4, 0
 off_8021AB0: .word ChipDataArr_8021DA8
 	thumb_func_end getChip8021DA8
 
-	thumb_func_start sub_8021AB4
-sub_8021AB4:
+	thumb_func_start setFolder_8021ab4
+// r0 - folder source
+// r1 - which folder
+setFolder_8021ab4:
 	push {r4,r6,r7,lr}
 	mov r2, #0x3c
 	mul r1, r2
 	mov r3, r10
-	ldr r3, [r3,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r3, [r3,#oToolkit_FoldersPtr]
 	add r1, r1, r3
 	mov r2, #0x3c
 	push {r1}
@@ -34,7 +36,7 @@ loc_8021ACC:
 	cmp r6, #0x3c
 	blt loc_8021ACC
 	pop {r4,r6,r7,pc}
-	thumb_func_end sub_8021AB4
+	thumb_func_end setFolder_8021ab4
 
 /* (r0:u16 bitfield) -> r0:u16 upper9Bits, r1:u16 lower9Bits
    preserves: lr
@@ -81,6 +83,8 @@ loc_8021B00:
 	pop {r3}
 	mov r0, r3
 	pop {r4,pc}
+	thumb_func_end GiveChips
+
 	thumb_func_start sub_8021B2A
 sub_8021B2A:
 	push {lr}
@@ -229,7 +233,7 @@ sub_8021C02:
 	mov r5, #0
 loc_8021C16:
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	ldr r6, off_8021C60 // =unk_20018EC
 	ldrb r3, [r6,r4]
 	lsr r2, r3, #4

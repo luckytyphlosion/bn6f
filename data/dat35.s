@@ -1572,7 +1572,7 @@ sub_812FC50::
 	strb r2, [r3,r0]
 	mov r4, r0
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	mov r2, #0x3c 
 	mul r0, r2
 	add r7, r7, r0
@@ -1625,7 +1625,7 @@ loc_812FCCC::
 	strb r1, [r0,#5]
 	mov r0, r4
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	mov r2, #0x3c 
 	mul r0, r2
 	add r7, r7, r0

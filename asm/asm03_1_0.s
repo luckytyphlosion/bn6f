@@ -2246,7 +2246,7 @@ owPlayer_80350a8:
 	mov r0, #1
 	mov r1, r5
 	add r1, #oOWPlayerObject_Coords
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	pop {r5,pc}
 	.balign 4, 0x00
 	thumb_func_end owPlayer_80350a8

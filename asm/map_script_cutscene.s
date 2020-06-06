@@ -2565,7 +2565,7 @@ SetCutsceneCameraScript:
 	mov r0, #0
 	str r0, [r1,#oCutsceneCameraInfo_Timer_CommandInitialized] // (dword_2011BD4 - 0x2011bd0)
 	mov r0, #0
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	pop {pc}
 	thumb_func_end SetCutsceneCameraScript
 
@@ -2577,7 +2577,7 @@ cutsceneCamera_focusCameraOnPlayerMaybe_8036faa:
 	ldr r1, [r1,#oToolkit_GameStatePtr]
 	ldr r1, [r1,#oGameState_OverworldPlayerObjectPtr]
 	add r1, #oOWPlayerObject_Coords
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	pop {pc}
 	thumb_func_end cutsceneCamera_focusCameraOnPlayerMaybe_8036faa
 
@@ -3327,7 +3327,7 @@ CutsceneCameraCmd_play_music:
 
 	thumb_local_start
 // 0x50 word1
-// call camera_writeUnk03_14_80301b2 with r0=1 and r1=word1
+// call camera_setCameraFixAndCameraFixSrc_80301b2 with r0=1 and r1=word1
 CutsceneCameraCmd_write_camera_field_03_14:
 	push {lr}
 	push {r1}
@@ -3335,7 +3335,7 @@ CutsceneCameraCmd_write_camera_field_03_14:
 	bl ReadCutsceneCameraScriptWord
 	mov r1, r0
 	mov r0, #1
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	pop {r1}
 	mov r0, #1
 	add r1, #5
@@ -3528,7 +3528,11 @@ CutsceneCommandJumptable:
 	.word CutsceneCmd_set_beast_out_counter_to_3+1
 	.word CutsceneCmd_jump_if_req_bbs_master_rank+1
 	.word CutsceneCmd_if_in_real_world_jump_else_jump+1
-DummyCutsceneScript: .word 0x11
+
+DummyCutsceneScript:
+	cs_cutscene_end
+	.balign 4, 0
+
 byte_8037694: .byte 0x0, 0xFF, 0xFF, 0xFF, 0x48, 0xFF, 0x34, 0xFF, 0x54, 0xFF
 	.byte 0x57, 0xFF, 0xFF, 0xFF, 0x4B, 0xFF, 0x35, 0xFF, 0x56
 	.byte 0xFF, 0x55, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF

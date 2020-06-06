@@ -443,7 +443,7 @@ int sub_813068C()
 		v6 = sub_8137884(v1 - 1);
 		v7 = sub_804A24C(v6 >> 4);
 		CopyBytes(v7, &unk_202708C, 32);
-		v8 = *(v0 + oToolkit_S_Chip_2002178_Ptr) + 60 * v5;
+		v8 = *(v0 + oToolkit_FoldersPtr) + 60 * v5;
 		v9 = 0;
 		v10 = 32;
 		v11 = 0;
@@ -8601,7 +8601,7 @@ int sub_8136C24()
     v15 = GetCurPETNaviStatsByte(0);
     v16 = GetCurPETNaviStatsByte(0);
     SelectS20047CCStruct8014018(0);
-    init_8013B4E();
+    initNaviStatsWithDefault_8013b4e();
     SetCurPETNaviStatsByte(0, 14, v0);
     SetCurPETNaviStatsByte(0, 33, v1);
     SetCurPETNaviStatsByte(0, 34, v2);
@@ -9710,7 +9710,7 @@ int __fastcall sub_8137718(signed int a1)
     sub_813781C(v2);
     if ( !sub_8137790() )
     {
-        sub_8021AB4(v3, v10);
+        setFolder_8021ab4(v3, v10);
         if ( v2 >= 34 )
             sub_804A1D0(v2 & 0xF);
     }
@@ -9743,8 +9743,8 @@ signed int sub_8137790()
         v3 = byte_20018ED;
         byte_20018ED = byte_20018EE;
         byte_20018EE = v3;
-        CopyWords(*(v1 + oToolkit_S_Chip_2002178_Ptr) + 60, *(v1 + oToolkit_S_Chip_2002178_Ptr) + 120, 0x3Cu);
-        sub_8021AB4(v0, 1);
+        CopyWords(*(v1 + oToolkit_FoldersPtr) + 60, *(v1 + oToolkit_S_Chip_2002178_Ptr) + 120, 0x3Cu);
+        setFolder_8021ab4(v0, 1);
         if ( GetCurPETNaviStatsByte(0) == 1 )
             SetCurPETNaviStatsByte(0, 45, 2);
     }
@@ -9803,7 +9803,7 @@ signed int __fastcall sub_813781C(unsigned int a1)
         if ( v2 >> 4 == 2 )
         {
             v9 = v4;
-            v5 = *(v1 + oToolkit_S_Chip_2002178_Ptr) + 60 * v4;
+            v5 = *(v1 + oToolkit_FoldersPtr) + 60 * v4;
             v6 = 0;
             do
             {
@@ -9832,7 +9832,7 @@ int __fastcall sub_8137890(int a1)
 {
     int v1; // r10
 
-    return 60 * a1 + *(v1 + oToolkit_S_Chip_2002178_Ptr);
+    return 60 * a1 + *(v1 + oToolkit_FoldersPtr);
 }
 
 
@@ -11102,7 +11102,7 @@ int __fastcall sub_8138848(int a1, int a2, int a3, int a4)
     npc_800461E();
     sub_80048D2();
     checkOWObjectInteractions_80037f4();
-    sub_802FFF4();
+    UpdateCamera();
     sub_80027B4();
     sub_800286C();
     sub_8003BF4();

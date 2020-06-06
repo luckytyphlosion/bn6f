@@ -3157,7 +3157,7 @@ sub_813CEA0:
 	mov r2, #0x3c 
 	mul r1, r2
 	mov r2, r10
-	ldr r2, [r2,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r2, [r2,#oToolkit_FoldersPtr]
 	add r1, r1, r2
 	lsl r0, r0, #1
 	add r0, r0, r1

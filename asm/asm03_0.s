@@ -19013,8 +19013,8 @@ camera_802FF4C:
 	push {r0-r2}
 	mov r5, r10
 	ldr r5, [r5,#oToolkit_CameraPtr]
-	ldrb r0, [r5,#oCamera_Unk_03]
-	ldr r1, [r5,#oCamera_Unk_14]
+	ldrb r0, [r5,#oCamera_CameraFixJumptableIndex]
+	ldr r1, [r5,#oCamera_CameraFixSrc]
 	push {r0,r1,r5}
 	mov r0, r10
 	// memBlock
@@ -19023,8 +19023,8 @@ camera_802FF4C:
 	mov r1, #0x4c 
 	bl ZeroFillByWord // (void *memBlock, int size) -> void
 	pop {r0,r1,r5}
-	strb r0, [r5,#oCamera_Unk_03]
-	str r1, [r5,#oCamera_Unk_14]
+	strb r0, [r5,#oCamera_CameraFixJumptableIndex]
+	str r1, [r5,#oCamera_CameraFixSrc]
 	ldr r0, off_802FFF0 // =eMapTilesState200be70
 	ldrb r3, [r0,#oMapTilesState200be70_MapWidth]
 	sub r3, #0x1e
@@ -19093,8 +19093,8 @@ off_802FFEC: .word off_803378C
 off_802FFF0: .word eMapTilesState200be70
 	thumb_func_end camera_802FF4C
 
-	thumb_func_start sub_802FFF4
-sub_802FFF4:
+	thumb_func_start UpdateCamera
+UpdateCamera:
 	push {r4-r7,lr}
 	mov r0, r8
 	mov r1, r9
@@ -19102,8 +19102,8 @@ sub_802FFF4:
 	push {r0-r2}
 	mov r5, r10
 	ldr r5, [r5,#oToolkit_CameraPtr]
-	ldr r0, off_8030030 // =off_8030034 
-	ldrb r1, [r5,#3]
+	ldr r0, off_8030030 // =CameraFixJumptable 
+	ldrb r1, [r5,#oCamera_CameraFixJumptableIndex]
 	lsl r1, r1, #2
 	ldr r0, [r0,r1]
 	mov lr, pc
@@ -19122,16 +19122,16 @@ sub_802FFF4:
 	mov r12, r2
 	pop {r4-r7,pc}
 	.balign 4, 0
-off_8030030: .word off_8030034
-off_8030034: .word nullsub_7+1
-	.word sub_8030126+1
+off_8030030: .word CameraFixJumptable
+CameraFixJumptable: .word nullsub_7+1
+	.word CopyCameraFixCoordsToCamera+1
 off_803003C: .word off_8030040
 off_8030040: .word sub_8030136+1
 	.word sub_8030136+1
 	.word sub_8030158+1
 	.word sub_8030194+1
 	.word sub_8030136+1
-	thumb_func_end sub_802FFF4
+	thumb_func_end UpdateCamera
 
 	thumb_local_start
 sub_8030054:
@@ -19264,16 +19264,16 @@ nullsub_7:
 	thumb_func_end nullsub_7
 
 	thumb_local_start
-sub_8030126:
-	ldr r7, [r5,#0x14]
-	ldr r2, [r7]
-	str r2, [r5,#0x30]
-	ldr r2, [r7,#4]
-	str r2, [r5,#0x34]
-	ldr r2, [r7,#8]
-	str r2, [r5,#0x38]
+CopyCameraFixCoordsToCamera:
+	ldr r7, [r5,#oCamera_CameraFixSrc]
+	ldr r2, [r7,#oOWObjectCoords_XFull]
+	str r2, [r5,#oCamera_X]
+	ldr r2, [r7,#oOWObjectCoords_YFull]
+	str r2, [r5,#oCamera_Y]
+	ldr r2, [r7,#oOWObjectCoords_ZFull]
+	str r2, [r5,#oCamera_Z]
 	mov pc, lr
-	thumb_func_end sub_8030126
+	thumb_func_end CopyCameraFixCoordsToCamera
 
 	thumb_local_start
 sub_8030136:
@@ -19349,14 +19349,14 @@ sub_8030194:
 	mov pc, lr
 	thumb_func_end sub_8030194
 
-	thumb_func_start camera_writeUnk03_14_80301b2
-camera_writeUnk03_14_80301b2:
+	thumb_func_start camera_setCameraFixAndCameraFixSrc_80301b2
+camera_setCameraFixAndCameraFixSrc_80301b2:
 	mov r2, r10
 	ldr r2, [r2,#oToolkit_CameraPtr]
-	strb r0, [r2,#oCamera_Unk_03]
-	str r1, [r2,#oCamera_Unk_14]
+	strb r0, [r2,#oCamera_CameraFixJumptableIndex]
+	str r1, [r2,#oCamera_CameraFixSrc]
 	mov pc, lr
-	thumb_func_end camera_writeUnk03_14_80301b2
+	thumb_func_end camera_setCameraFixAndCameraFixSrc_80301b2
 
 	thumb_func_start sub_80301BC
 sub_80301BC:
@@ -19386,9 +19386,9 @@ GetCameraXYZ:
 SetCameraXYZ:
 	mov r3, r10
 	ldr r3, [r3,#oToolkit_CameraPtr]
-	str r0, [r3,#0x30]
-	str r1, [r3,#0x34]
-	str r2, [r3,#0x38]
+	str r0, [r3,#oCamera_X]
+	str r1, [r3,#oCamera_Y]
+	str r2, [r3,#oCamera_Z]
 	mov pc, lr
 	thumb_func_end SetCameraXYZ
 

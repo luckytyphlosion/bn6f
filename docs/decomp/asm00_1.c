@@ -2196,13 +2196,13 @@ void __cdecl newGame_8004df0()
     *&gs->pad_48[oGameState_LastMapGroup] = 4;
     v13 = initGameProgressBuffer_803532c();
     sub_8021D36(v13, v14, v15, v16);
-    ZeroFillByWord(*(v2 + oToolkit_S_Chip_2002178_Ptr), 180);
+    ZeroFillByWord(*(v2 + oToolkit_FoldersPtr), 180);
     zeroFill_e2002230();
-    sub_8021AB4(byte_80213AC, 0);
+    setFolder_8021ab4(StartingFolder, 0);
     sub_81376E8();
     sub_8137700();
     sub_8137808();
-    sub_80133EC();
+    initAllNaviStatsWithDefault_80133ec();
     sub_813B768();
     zeroFill_813B934();
     v17 = sub_813C324();
@@ -2343,7 +2343,7 @@ void __usercall gamestate_8005268(GameState *gs@<R5>, int a1@<R0>)
     sub_80039AA();
     sub_8003AFA();
     checkOWObjectInteractions_80037f4();
-    sub_802FFF4();
+    UpdateCamera();
     sub_8030580();
     sub_80027B4();
     sub_800286C();
@@ -5917,7 +5917,7 @@ int battle_8007A44()
             v7 = sub_802D234();
             (*(&JumpTable8007B50 + v7))();
             RunBattleObjectLogic();
-            sub_802FFF4();
+            UpdateCamera();
             sub_800BFC4();
             sub_800FDC0();
             sub_801BEE0();
@@ -10679,9 +10679,9 @@ void __fastcall sub_800A318(int a1)
     {
         v5 = dword_802137C[sub_802D234()];
         if ( !v5 )
-            v5 = *(v1 + oToolkit_S_Chip_2002178_Ptr);
+            v5 = *(v1 + oToolkit_FoldersPtr);
     }
-    if ( v5 == *(v1 + oToolkit_S_Chip_2002178_Ptr) )
+    if ( v5 == *(v1 + oToolkit_FoldersPtr) )
     {
         v6 = v5;
         v7 = getPETNaviSelect();
@@ -10769,9 +10769,9 @@ void sub_800A3E4()
     {
         v4 = dword_802137C[sub_802D234()];
         if ( !v4 )
-            v4 = *(v0 + oToolkit_S_Chip_2002178_Ptr);
+            v4 = *(v0 + oToolkit_FoldersPtr);
     }
-    if ( v4 == *(v0 + oToolkit_S_Chip_2002178_Ptr) )
+    if ( v4 == *(v0 + oToolkit_FoldersPtr) )
     {
         v5 = v4;
         v6 = getPETNaviSelect();

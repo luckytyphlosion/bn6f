@@ -10919,7 +10919,7 @@ sub_80AADA6:
 	ldr r0, [r0,#oToolkit_S2001c04_Ptr]
 	ldrb r0, [r0,#5]
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	mov r4, #0x1e
 	mul r4, r0
 loc_80AADB6:
@@ -10941,7 +10941,7 @@ loc_80AADB6:
 	ldr r0, [r0,#oToolkit_S2001c04_Ptr]
 	ldrb r0, [r0,#5]
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	mov r4, #0x1e
 	mul r4, r0
 loc_80AADE4:

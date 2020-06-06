@@ -7017,7 +7017,7 @@ BOOL sub_8013396()
 
 
 // 0x80133ec
-void sub_80133EC()
+void initAllNaviStatsWithDefault_80133ec()
 {
     signed int v0; // r5
     int v1; // r1
@@ -7026,7 +7026,7 @@ void sub_80133EC()
     do
     {
         v1 = byte_801341B[v0];
-        init_8013B4E();
+        initNaviStatsWithDefault_8013b4e();
         ++v0;
     }
     while ( v0 < 7 );
@@ -7834,7 +7834,7 @@ int sub_8013B20()
 
 // 0x8013b4e
 // (bool a1, int a2) -> void
-void init_8013B4E()
+void initNaviStatsWithDefault_8013b4e()
 {
     int v0; // r10
     int v1; // r7

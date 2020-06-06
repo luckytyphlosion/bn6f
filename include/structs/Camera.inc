@@ -6,7 +6,7 @@
 
 	struct_org 0x2
 	u8 Unk_02 // loc=0x2
-	u8 Unk_03 // loc=0x3
+	u8 CameraFixJumptableIndex // loc=0x3
 	u16 Unk_04 // loc=0x4
 	u16 Unk_06 // loc=0x6
 	u16 Unk_08 // loc=0x8
@@ -15,7 +15,7 @@
 	u16 Unk_0e // shake type // loc=0xe
 	u16 Unk_10 // loc=0x10
 	u16 Unk_12 // loc=0x12
-	u32 Unk_14 // loc=0x14
+	u32 CameraFixSrc // loc=0x14
 	u32 Unk_18 // loc=0x18
 	u32 Unk_1c // loc=0x1c
 	u32 Unk_20 // loc=0x20

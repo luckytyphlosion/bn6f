@@ -205,7 +205,7 @@
 
 	enum ccs_write_camera_field_03_14_cmd // 0x50
 // 0x50 word1
-// call camera_writeUnk03_14_80301b2 with r0=1 and r1=word1
+// call camera_setCameraFixAndCameraFixSrc_80301b2 with r0=1 and r1=word1
 	.macro ccs_write_camera_field_03_14 word1:req
 	.byte ccs_write_camera_field_03_14_cmd
 	.word \word1

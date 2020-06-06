@@ -1545,7 +1545,7 @@ loc_8003B5A:
 	tst r2, r1
 	beq loc_8003B68
 	lsr r1, r1, #1
-	add r5, #0xc8
+	add r5, #oOWPlayerObject_Size
 	cmp r5, r3
 	bge loc_8003B82
 	b loc_8003B5A
@@ -1555,13 +1555,13 @@ loc_8003B68:
 	mov r0, #9
 	strb r0, [r5]
 	pop {r0-r4}
-	strb r0, [r5,#1]
-	str r1, [r5,#0x1c]
-	str r2, [r5,#0x20]
-	str r3, [r5,#0x24]
-	str r4, [r5,#4]
+	strb r0, [r5,#oOWPlayerObject_Index]
+	str r1, [r5,#oOWPlayerObject_X]
+	str r2, [r5,#oOWPlayerObject_Y]
+	str r3, [r5,#oOWPlayerObject_Z]
+	str r4, [r5,#oOWPlayerObject_Unk_04]
 	mov r0, #0
-	str r0, [r5,#8]
+	str r0, [r5,#oOWPlayerObject_Unk_08]
 	pop {pc}
 loc_8003B82:
 	mov r5, #0
@@ -3734,19 +3734,19 @@ newGame_8004df0:
 	bl sub_8021D36
 	mov r0, r10
 	// memBlock
-	ldr r0, [r0,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r0, [r0,#oToolkit_FoldersPtr]
 	mov r1, #0x3c
 	mov r2, #3
 	mul r1, r2
 	bl ZeroFillByWord // (void *memBlock, int size) -> void
 	bl zeroFill_e2002230
-	ldr r0, off_80050E8 // =byte_80213AC
+	ldr r0, off_80050E8 // =StartingFolder
 	mov r1, #0
-	bl sub_8021AB4
+	bl setFolder_8021ab4
 	bl sub_81376E8
 	bl sub_8137700
 	bl sub_8137808
-	bl sub_80133EC
+	bl initAllNaviStatsWithDefault_80133ec
 	bl sub_813B768
 	bl zeroFill_813B934
 	bl sub_813C324
@@ -3769,7 +3769,7 @@ newGame_8004df0:
 	pop {r4-r7,pc}
 	.balign 4, 0
 off_80050E4: .word 0x100
-off_80050E8: .word byte_80213AC
+off_80050E8: .word StartingFolder
 	thumb_func_end newGame_8004df0
 
 // () -> void
@@ -3918,7 +3918,7 @@ gamestate_8005268:
 	bl sub_80039AA
 	bl sub_8003AFA
 	bl checkOWObjectInteractions_80037f4
-	bl sub_802FFF4
+	bl UpdateCamera
 	bl sub_8030580
 	bl sub_80027B4
 	bl sub_800286C
@@ -7684,7 +7684,7 @@ sub_8007338:
 	mov r4, #0
 	bl camera_802FF4C
 	mov r0, #0
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	pop {pc}
 	.word 0x100000
 	thumb_func_end sub_8007338
@@ -8643,7 +8643,7 @@ loc_8007A9A:
 	mov lr, pc
 	bx r0
 	bl RunBattleObjectLogic
-	bl sub_802FFF4
+	bl UpdateCamera
 	bl sub_800BFC4
 	bl sub_800FDC0
 	bl sub_801BEE0
@@ -13973,10 +13973,10 @@ loc_800A32C:
 	tst r0, r0
 	bne loc_800A33E
 	mov r0, r10
-	ldr r0, [r0,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r0, [r0,#oToolkit_FoldersPtr]
 loc_800A33E:
 	mov r1, r10
-	ldr r1, [r1,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r1, [r1,#oToolkit_FoldersPtr]
 	cmp r0, r1
 	bne loc_800A35C
 	push {r0}
@@ -14086,10 +14086,10 @@ loc_800A402:
 	tst r0, r0
 	bne loc_800A414
 	mov r0, r10
-	ldr r0, [r0,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r0, [r0,#oToolkit_FoldersPtr]
 loc_800A414:
 	mov r1, r10
-	ldr r1, [r1,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r1, [r1,#oToolkit_FoldersPtr]
 	cmp r0, r1
 	bne loc_800A432
 	push {r0}

@@ -81,8 +81,8 @@
 // wait for cutscene variable to be equal to byte2
 // byte1 - cutscene variable to read from
 // byte2 - value to compare cutscene variable with
-	.macro cs_wait_var_equal
-	.byte cs_wait_var_equal_cmd byte1:req byte2:req
+	.macro cs_wait_var_equal byte1:req byte2:req
+	.byte cs_wait_var_equal_cmd
 	.byte \byte1
 	.byte \byte2
 	.endm
@@ -467,8 +467,8 @@
 // byte1 - memory param (base index, memory for byte3 is [eMapScriptState + byte1 + 1])
 // byte2 or mem1 - argument 1 for screen fade
 // byte3 or mem2 - argument 2 for screen fade
-	.macro cs_set_screen_fade
-	.byte cs_set_screen_fade_cmd byte1:req byte2:req byte3:req
+	.macro cs_set_screen_fade byte1:req byte2:req byte3:req
+	.byte cs_set_screen_fade_cmd
 	.byte \byte1
 	.byte \byte2
 	.byte \byte3
@@ -700,7 +700,7 @@
 	.macro cs_run_text_script byte1:req byte2:req
 	.byte cs_run_text_script_cmd
 	.byte \byte1
-	.if \byte1 != 0xff
+	.if \byte1 == 0xff
 	.byte \byte2
 	.endif
 	.endm
@@ -1205,7 +1205,7 @@
 	.macro cs_spawn_ow_npc_objects_from_list word2:req
 	.byte cs_spawn_or_free_ow_map_or_npc_objects_cmd
 	.byte cs_spawn_ow_npc_objects_from_list_subcmd
-	.byte \word2
+	.word \word2
 	.endm
 
 	subenum cs_spawn_ow_npc_objects_from_map_subcmd // 0x3

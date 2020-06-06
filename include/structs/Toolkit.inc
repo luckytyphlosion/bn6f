@@ -22,7 +22,7 @@
 	ptr GameStatePtr // loc=0x3c
 	ptr S2001c04_Ptr // loc=0x40
 	ptr EventFlagsPtr // loc=0x44
-	ptr S_Chip_2002178_Ptr // loc=0x48
+	ptr FoldersPtr // loc=0x48
 	ptr Unk2002230_Ptr // loc=0x4c
 	ptr KeyItemsPtr // loc=0x50
 	ptr Unk20032c8_Ptr // loc=0x54

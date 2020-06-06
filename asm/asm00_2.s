@@ -2357,16 +2357,16 @@ loc_800FF0A:
 	mov r0, #0xff
 loc_800FF0C:
 	strb r0, [r4,#oAIData_Unk_04]
-	mov r1, #4
+	mov r1, #oNaviStats_NormalShot
 	bl GetBattleNaviStatsByte_AllianceFromBattleObject
 	strb r0, [r4,#oAIData_Unk_06]
-	mov r1, #5
+	mov r1, #oNaviStats_ChargeShot
 	bl GetBattleNaviStatsByte_AllianceFromBattleObject
 	bl sub_800FFAA
-	mov r1, #0x39 
+	mov r1, #oNaviStats_Unk_39 
 	bl GetBattleNaviStatsByte_AllianceFromBattleObject
 	strb r0, [r4,#oAIData_Unk_05]
-	mov r1, #7
+	mov r1, #oNaviStats_BLeftAbility
 	bl GetBattleNaviStatsByte_AllianceFromBattleObject
 	strb r0, [r4,#oAIData_Unk_08]
 	mov r0, #0xff
@@ -9452,8 +9452,8 @@ off_80133E4: .word 0x190
 off_80133E8: .word byte_8021369
 	thumb_func_end sub_8013396
 
-	thumb_func_start sub_80133EC
-sub_80133EC:
+	thumb_func_start initAllNaviStatsWithDefault_80133ec
+initAllNaviStatsWithDefault_80133ec:
 	push {r5,r6,lr}
 	mov r0, #0x4 // (off_8013410 - 0x801340c)
 	ldr r6, off_8013408 // =off_801340C 
@@ -9462,7 +9462,7 @@ sub_80133EC:
 loc_80133F6:
 	mov r0, r5
 	ldrb r1, [r6,r5]
-	bl init_8013B4E // (bool a1, int a2) -> void
+	bl initNaviStatsWithDefault_8013b4e // (bool a1, int a2) -> void
 	add r5, #1
 	cmp r5, #7
 	blt loc_80133F6
@@ -9473,7 +9473,7 @@ off_801340C: .word byte_8013414
 off_8013410: .word byte_801341B
 byte_8013414: .byte 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0xB
 byte_801341B: .byte 0x0, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB
-	thumb_func_end sub_80133EC
+	thumb_func_end initAllNaviStatsWithDefault_80133ec
 
 	thumb_func_start sub_8013422
 sub_8013422:
@@ -9496,75 +9496,98 @@ initNaviStats_WithDefaultStatsMaybe_8013438:
 	// memBlock
 	mov r0, r4
 	// size
-	mov r1, #0x64 
+	mov r1, #oNaviStats_Size 
 	bl ZeroFillByWord // (void *memBlock, int size) -> void
+
 	mov r0, #1
-	mov r1, #0x20 
+	mov r1, #oNaviStats_Unk_20
 	strb r0, [r4,r1]
+
 	mov r0, #1
-	strb r0, [r4,#5]
+	strb r0, [r4,#oNaviStats_ChargeShot]
+
 	mov r0, #0xff
-	strb r0, [r4,#7]
+	strb r0, [r4,#oNaviStats_BLeftAbility]
+
 	mov r0, #0
-	strb r0, [r4,#0x18]
+	strb r0, [r4,#oNaviStats_Unk_18]
+
 	mov r0, #0
-	strb r0, [r4,#0x19]
+	strb r0, [r4,#oNaviStats_Unk_19]
+
 	mov r0, #0
-	strb r0, [r4,#8]
+	strb r0, [r4,#oNaviStats_Unk_08]
+
 	mov r0, #4
-	strb r0, [r4,#9]
+	strb r0, [r4,#oNaviStats_RegUP]
+
 	mov r0, #5
-	strb r0, [r4,#0xa]
+	strb r0, [r4,#oNaviStats_CustomLevel]
+
 	mov r0, #5
-	strb r0, [r4,#0xb]
+	strb r0, [r4,#oNaviStats_MegaLevel]
+
 	mov r0, #1
-	strb r0, [r4,#0xc]
+	strb r0, [r4,#oNaviStats_GigaLevel]
+
 	mov r0, #0
-	strb r0, [r4,#0xd]
+	strb r0, [r4,#oNaviStats_Unk_0d]
+
 	mov r0, #0
-	mov r1, #0x26 
+	mov r1, #oNaviStats_Unk_26
 	strb r0, [r4,r1]
+
 	mov r0, #0xff
-	strb r0, [r4,#0x12]
+	strb r0, [r4,#oNaviStats_Unk_12]
+
 	mov r0, #0x1f
-	mov r1, #0x27 
+	mov r1, #oNaviStats_Unk_27
 	strb r0, [r4,r1]
+
 	mov r0, #0
-	mov r1, #0x28 
+	mov r1, #oNaviStats_Unk_28
 	strb r0, [r4,r1]
-	mov r0, #0x99
-	mov r1, #0xe
+
+	mov r0, #153
+	mov r1, #oNaviStats_Mood
 	strb r0, [r4,r1]
-	mov r0, #0x64 
-	mov r1, #0x40 
+
+	mov r0, #100
+	mov r1, #oNaviStats_CurHP 
 	strh r0, [r4,r1]
-	mov r1, #0x42 
+	mov r1, #oNaviStats_MaxHP
 	strh r0, [r4,r1]
-	mov r1, #0x3e 
+	mov r1, #oNaviStats_MaxBaseHP
 	strh r0, [r4,r1]
+
 	mov r0, #0
-	mov r1, #0x2c 
+	mov r1, #oNaviStats_Transformation
 	strb r0, [r4,r1]
+
 	mov r0, #0
-	mov r1, #0x2d 
+	mov r1, #oNaviStats_Unk_2d
 	strb r0, [r4,r1]
+
 	mov r0, #0xff
-	mov r1, #0x2e 
-loc_80134AC:
+	mov r1, #oNaviStats_Folder1Reg
+.clearFolderRegLoop
 	strb r0, [r4,r1]
 	add r1, #1
-	cmp r1, #0x30 
-	ble loc_80134AC
+	cmp r1, #oNaviStats_Folder3Reg
+	ble .clearFolderRegLoop
+
 	mov r0, #0xff
-	mov r1, #0x56 
-loc_80134B8:
+	mov r1, #oNaviStats_Folder1Tag1
+.clearFolderTagLoop
 	strb r0, [r4,r1]
 	add r1, #1
-	cmp r1, #0x5b 
-	ble loc_80134B8
+	cmp r1, #oNaviStats_Folder3Tag2 
+	ble .clearFolderTagLoop
+
 	mov r0, #3
-	mov r1, #0x21 
+	mov r1, #oNaviStats_BeastOutCounter
 	strb r0, [r4,r1]
+
 	pop {r4,pc}
 	thumb_func_end initNaviStats_WithDefaultStatsMaybe_8013438
 
@@ -10546,8 +10569,8 @@ loc_8013B4A:
 	thumb_func_end sub_8013B20
 
 // (bool a1, int a2) -> void
-	thumb_func_start init_8013B4E
-init_8013B4E:
+	thumb_func_start initNaviStatsWithDefault_8013b4e
+initNaviStatsWithDefault_8013b4e:
 	push {r4,r6,r7,lr}
 	cmp r0, #0
 	beq loc_8013B56
@@ -10556,11 +10579,11 @@ loc_8013B56:
 	mov r4, r1
 	mov r7, r10
 	ldr r7, [r7,#oToolkit_NaviStatsPtr]
-	mov r2, #0x64 
+	mov r2, #oNaviStats_Size
 	mul r0, r2
 	add r7, r7, r0
 	b loc_8013B6E
-	thumb_func_end init_8013B4E
+	thumb_func_end initNaviStatsWithDefault_8013b4e
 
 // (int idx, int a2) -> void
 	thumb_func_start init_8013B64
@@ -10576,51 +10599,68 @@ loc_8013B6E:
 	mul r0, r4
 	ldr r6, off_8013CB4 // =byte_80210DD 
 	add r6, r6, r0
-	mov r1, #0x29 
+
+	mov r1, #oNaviStats_NaviIndex
 	strb r4, [r7,r1]
+
 	ldrb r0, [r6]
 	add r0, r0, r0
-	mov r1, #0x40 
+	mov r1, #oNaviStats_CurHP
 	strh r0, [r7,r1]
-	mov r1, #0x42 
+	mov r1, #oNaviStats_MaxHP
 	strh r0, [r7,r1]
-	mov r1, #0x3e 
+	mov r1, #oNaviStats_MaxBaseHP
 	strh r0, [r7,r1]
+
 	ldrb r0, [r6,#1]
-	mov r1, #0x23 
+	mov r1, #oNaviStats_SuperArmor
 	strb r0, [r7,r1]
+
 	ldrb r0, [r6,#2]
-	strb r0, [r7,#0x1b]
+	strb r0, [r7,#oNaviStats_FloatShoes]
+
 	ldrb r0, [r6,#3]
-	strb r0, [r7,#0x1c]
+	strb r0, [r7,#oNaviStats_AirShoes]
+
 	ldrb r0, [r6,#4]
-	mov r1, #0x1d
+	mov r1, #oNaviStats_UnderSht
 	strb r0, [r7,r1]
+
 	ldrb r0, [r6,#5]
-	strb r0, [r7,#6]
+	strb r0, [r7,#oNaviStats_FstBarr]
+
 	ldrb r0, [r6,#6]
-	strb r0, [r7,#0xb]
+	strb r0, [r7,#oNaviStats_MegaLevel]
+
 	ldrb r0, [r6,#7]
-	strb r0, [r7,#0xc]
+	strb r0, [r7,#oNaviStats_GigaLevel]
+
 	ldrb r0, [r6,#8]
-	strb r0, [r7,#4]
+	strb r0, [r7,#oNaviStats_NormalShot]
+
 	ldrb r0, [r6,#9]
-	strb r0, [r7,#5]
+	strb r0, [r7,#oNaviStats_ChargeShot]
+
 	ldrb r0, [r6,#0xa]
-	strb r0, [r7,#7]
+	strb r0, [r7,#oNaviStats_BLeftAbility]
+
 	ldrb r0, [r6,#0xb]
-	mov r1, #0x46 
+	mov r1, #oNaviStats_Unk_46
 	strh r0, [r7,r1]
+
 	ldrb r0, [r6,#0xc]
-	mov r1, #0x4a 
+	mov r1, #oNaviStats_Unk_4a
 	strh r0, [r7,r1]
+
 	ldrb r0, [r6,#0xd]
-	mov r1, #0x48 
+	mov r1, #oNaviStats_Unk_48
 	strh r0, [r7,r1]
+
 	ldrb r0, [r6,#0xe]
-	strb r0, [r7]
+	strb r0, [r7,#oNaviStats_Unk_00]
+
 	ldrb r0, [r6,#0xf]
-	mov r1, #0x39 
+	mov r1, #oNaviStats_Unk_39
 	strb r0, [r7,r1]
 	pop {r4,r6,r7,pc}
 	thumb_func_end init_8013B64

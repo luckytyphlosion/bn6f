@@ -807,7 +807,7 @@ loc_81306AC:
 	bl CopyBytes // (u8 *src, u8 *dest, int byteCount) -> void
 	pop {r0}
 	mov r4, r10
-	ldr r4, [r4,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r4, [r4,#oToolkit_FoldersPtr]
 	mov r2, #0x3c 
 	mul r0, r2
 	add r4, r4, r0
@@ -12895,7 +12895,7 @@ sub_8136C24:
 	mov r0, #0
 	bl GetNaviStatsIndexFromCurPETNavi // (int idx) -> bool8
 	mov r1, #0
-	bl init_8013B4E // (bool a1, int a2) -> void
+	bl initNaviStatsWithDefault_8013b4e // (bool a1, int a2) -> void
 	mov r0, #0
 	mov r1, #0xe
 	ldr r2, [sp]
@@ -14244,7 +14244,7 @@ loc_813773E:
 	bne loc_8137762
 	mov r0, r4
 	ldr r1, [sp]
-	bl sub_8021AB4
+	bl setFolder_8021ab4
 	cmp r7, #0x22 
 	blt loc_8137762
 	mov r0, #0xf
@@ -14296,18 +14296,18 @@ sub_8137790:
 	mov r2, #0x3c 
 	mul r0, r2
 	mov r3, r10
-	ldr r3, [r3,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r3, [r3,#oToolkit_FoldersPtr]
 	add r0, r0, r3
 	mov r1, #2
 	mul r1, r2
 	mov r3, r10
-	ldr r3, [r3,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r3, [r3,#oToolkit_FoldersPtr]
 	add r1, r1, r3
 	mov r2, #0x3c 
 	bl CopyWords // (u32 *src, u32 *dest, int size) -> void
 	mov r0, r4
 	mov r1, #1
-	bl sub_8021AB4
+	bl setFolder_8021ab4
 	mov r0, #0
 	mov r1, #0x2d 
 	bl GetCurPETNaviStatsByte // (int a1, int a2) -> u8
@@ -14368,7 +14368,7 @@ sub_813781C:
 	bne loc_813785E
 	push {r1}
 	mov r7, r10
-	ldr r7, [r7,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r7, [r7,#oToolkit_FoldersPtr]
 	mov r2, #0x3c 
 	mov r0, r1
 	mul r0, r2
@@ -14394,7 +14394,7 @@ loc_813785E:
 	pop {r4-r7,pc}
 	.balign 4, 0
 off_8137864: .word off_8137868
-off_8137868: .word byte_80213AC
+off_8137868: .word StartingFolder
 	.word byte_80213E8
 	.word byte_802158C
 	.word byte_8021604
@@ -14418,7 +14418,7 @@ sub_8137890:
 	mov r2, #0x3c 
 	mul r0, r2
 	mov r3, r10
-	ldr r3, [r3,#oToolkit_S_Chip_2002178_Ptr]
+	ldr r3, [r3,#oToolkit_FoldersPtr]
 	add r0, r0, r3
 	pop {pc}
 	.byte 0, 0
@@ -16230,7 +16230,7 @@ sub_81387D8:
 	mov r4, #0
 	bl camera_802FF4C
 	mov r0, #0
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	mov r0, #0
 	mov r1, #0
 	mov r2, #0
@@ -16256,7 +16256,7 @@ sub_8138848:
 	bl npc_800461E
 	bl sub_80048D2
 	bl checkOWObjectInteractions_80037f4
-	bl sub_802FFF4
+	bl UpdateCamera
 	bl sub_80027B4
 	bl sub_800286C
 	bl sub_8003BF4

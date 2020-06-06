@@ -123,7 +123,7 @@ off_8089154: .word sub_8089160+1
 sub_8089160:
 	push {r4-r7,lr}
 	mov r0, #0
-	bl camera_writeUnk03_14_80301b2
+	bl camera_setCameraFixAndCameraFixSrc_80301b2
 	mov r0, #0
 	bl doPETEffect_8033fc0
 	mov r0, #0

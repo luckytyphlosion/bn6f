@@ -338,7 +338,9 @@ eStruct2001c04End:: // 0x2001c88
 // u8[1448]
 // continuous buffer of bit flags addressed with a u16 flag offset
 eEventFlags:: // 0x2001C88
-	.space 1448
+	.space 1264
+eFolders:: // 0x2002178
+	.space 184
 unk_2002230:: // 0x2002230
 	.space 236
 unk_200231C:: // 0x200231c
@@ -370,6 +372,10 @@ unk_2004348:: // 0x2004348
 eNaviStats:: // 0x20047cc
     navi_stats_struct eNaviStats0
     navi_stats_struct eNaviStats1
+
+	// enough space for 5 more navis here
+	// but the code seems to only use slot 1 for other navis
+
 	.space 504
 unk_2004A8C:: // 0x2004a8c
 	.space 404

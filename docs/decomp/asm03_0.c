@@ -13692,14 +13692,14 @@ void __fastcall camera_802FF4C(int x, int y, int a3, int mapGroup)
 
 
 // 0x802fff4
-int sub_802FFF4()
+int UpdateCamera()
 {
     int v0; // r8
     int v1; // r10
     int v2; // r5
 
     v2 = *(v1 + oToolkit_CameraPtr);
-    (*(&off_8030034 + *(v2 + 3)))();
+    (*(&CameraFixJumptable + *(v2 + 3)))();
     camera_doShakeEffect_80301e8();
     sub_8030054();
     (*(&JumpTable8030040 + *(v2 + 2)))();
@@ -13800,7 +13800,7 @@ void nullsub_7()
 
 
 // 0x8030126
-void sub_8030126()
+void CopyCameraFixCoordsToCamera()
 {
     _DWORD *v0; // r5
     _DWORD *v1; // r7

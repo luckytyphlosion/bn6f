@@ -213,10 +213,10 @@
 // byte2 - speed of movement
 // byte3 - distance of movement
 	.macro npc_move_in_direction byte1:req byte2:req byte3:req
+	.byte npc_move_in_direction_cmd
 	.byte \byte1
 	.byte \byte2
 	.byte \byte3
-	.byte npc_move_in_direction_cmd
 	.endm
 
 	enum npc_set_animation_cmd // 0x16
