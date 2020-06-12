@@ -32,7 +32,8 @@
 	u8 BeastOutCounter // loc=0x21
 	struct_org 0x23
 	u8 SuperArmor // loc=0x23
-	struct_org 0x26
+	struct_org 0x25
+	u8 Humor // loc=0x25
 	u8 Unk_26 // loc=0x26
 	u8 Unk_27 // loc=0x27
 	u8 Unk_28 // loc=0x28
@@ -64,6 +65,9 @@
 	u8 Folder2Tag2 // loc=0x59
 	u8 Folder3Tag1 // loc=0x5a
 	u8 Folder3Tag2 // loc=0x5b
+	struct_org 0x5f
+	u8 Poem // loc=0x5f
+	u8 ChipShuffle // loc=0x60
 	struct_org 0x63
 	u8 TurnsUntilCustBugActivates // loc=0x63
 	u0 Size // loc=0x64

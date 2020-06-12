@@ -205,19 +205,19 @@ RunLMessageTextScript:
 	bl GetCurPETNavi // () -> u8
 	cmp r0, #0
 	bne loc_8099282
-	
-    mov r0, r10
+
+	mov r0, r10
 	ldr r0, [r0,#oToolkit_GameStatePtr]
 	ldrb r0, [r0,#oGameState_MapGroup]
-	
-    cmp r0, #INTERNET_MAP_GROUP_START
+
+	cmp r0, #INTERNET_MAP_GROUP_START
 	bge loc_809924A
-	
-    movflag EVENT_COPYBOT_ACTIVE
+
+	movflag EVENT_COPYBOT_ACTIVE
 	bl TestEventFlagFromImmediate // (u8 eventGroupOffset, u8 byteAndFlagOffset) -> !zf
-    bne loc_8099282
-	
-    movflag EVENT_PET_NAVI_ACTIVE
+	bne loc_8099282
+
+	movflag EVENT_PET_NAVI_ACTIVE
 	bl TestEventFlagFromImmediate // (u8 eventGroupOffset, u8 byteAndFlagOffset) -> !zf
 	beq loc_8099282
 
@@ -232,10 +232,10 @@ loc_809924A:
 
 	cmp r0, #1
 	bne loc_8099266
-        ldr r0, MegamanJokesCompText8099294 // =CompText8738B24 + COMPRESSED_PTR_FLAG
-        bl DecompressTextArchiveForCutscene2
-        mov r1, #0
-        bl chatbox_runScript // (TextScriptArchive *archive, u8 scriptIdx) -> void
+	ldr r0, MegamanJokesCompText8099294 // =CompText8738B24 + COMPRESSED_PTR_FLAG
+	bl DecompressTextArchiveForCutscene2
+	mov r1, #0
+	bl chatbox_runScript // (TextScriptArchive *archive, u8 scriptIdx) -> void
 	b loc_8099290
 
 loc_8099266
@@ -245,10 +245,10 @@ loc_8099266
 
 	cmp r0, #1
 	bne loc_8099282
-        ldr r0, dword_8099298 // =CompText873A528 + COMPRESSED_PTR_FLAG
-        bl DecompressTextArchiveForCutscene2
-        mov r1, #0
-        bl chatbox_runScript // (TextScriptArchive *archive, u8 scriptIdx) -> void
+	ldr r0, dword_8099298 // =CompText873A528 + COMPRESSED_PTR_FLAG
+	bl DecompressTextArchiveForCutscene2
+	mov r1, #0
+	bl chatbox_runScript // (TextScriptArchive *archive, u8 scriptIdx) -> void
 	b loc_8099290
 loc_8099282:
 	bl chatbox_uncompMapTextArchives_803FD3C // () -> int

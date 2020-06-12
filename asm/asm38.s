@@ -562,6 +562,9 @@ sub_3005F56:
 	thumb_func_end sub_3005F56
 
 	thumb_func_start sub_3005F78
+// r0 - some param
+// r2 - jumptable index
+// r6 - num palettes
 sub_3005F78:
 	push {r5,lr}
 	cmp r6, #0
@@ -592,23 +595,119 @@ loc_3005F9C:
 locret_3005FAA:
 	pop {r5,pc}
 off_3005FAC: .word dword_3005FB0
-dword_3005FB0: .word 0x0
-	.word 0x0
-	.word byte_3005FC1
-	.word byte_3005FFB
-	.byte 0xA8
-byte_3005FC1: .byte 0x46, 0xE8, 0x6, 0xC0, 0xE, 0xAC, 0x5, 0xE4, 0xE, 0x6D
-	.byte 0x4, 0xED, 0xE, 0x8C, 0x46, 0x1F, 0x21, 0x8, 0x1A, 0xC
-	.byte 0x1B, 0x4D, 0x1B, 0x61, 0x46, 0x0, 0x3, 0x24, 0x3, 0x2D
-	.byte 0x3, 0x48, 0x43, 0x54, 0x43, 0x5D, 0x43, 0x0, 0xC, 0x24
-	.byte 0xC, 0x2D, 0xC, 0x64, 0x1, 0xAD, 0x2, 0x20, 0x43, 0x28
-	.byte 0x43, 0x45, 0x46, 0x28, 0x18, 0xF7, 0x46, 0xA8
-byte_3005FFB: .byte 0x46, 0xE8, 0x6, 0xC0, 0xE, 0xAC, 0x5, 0xE4, 0xE, 0x6D
-	.byte 0x4, 0xED, 0xE, 0x0, 0x3, 0x24, 0x3, 0x2D, 0x3, 0x48
-	.byte 0x43, 0x54, 0x43, 0x5D, 0x43, 0x0, 0xC, 0x24, 0xC, 0x2D
-	.byte 0xC, 0x64, 0x1, 0xAD, 0x2, 0x20, 0x43, 0x28, 0x43, 0x45
-	.byte 0x46, 0x28, 0x1A, 0xF7, 0x46
+dword_3005FB0:
+	.word NULL
+	.word NULL
+	.word sub_3005FC0
+	.word sub_3005FFA
 	thumb_func_end sub_3005F78
+
+	thumb_local_start
+// input:
+// r1 - red mix param
+// r2 - green mix param
+// r3 - blue mix param
+// r5 - input palette color
+sub_3005FC0:
+	mov r8, r5
+
+	// get input red
+	lsl r0, r5, #27
+	lsr r0, r0, #27
+
+	// get input green
+	lsl r4, r5, #22
+	lsr r4, r4, #27
+
+	// get input blue
+	lsl r5, r5, #17
+	lsr r5, r5, #27
+
+	// save red mix param
+	mov r12, r1
+
+	// ir (input red) = 31 - ir
+	mov r1, #31
+	sub r0, r1, r0
+	
+	// ig = 31 - ig
+	sub r4, r1, r4
+	// ib = 31 - ib
+	sub r5, r1, r5
+
+	// retrieve red mix param
+	mov r1, r12
+
+	// shift input components
+	lsl r0, r0, #12
+	lsl r4, r4, #12
+	lsl r5, r5, #12
+	// inputComponent = ((31 - inputComponent) << 12) * mixParam
+	mul r0, r1
+	mul r4, r2
+	mul r5, r3
+	// inputComponent = (((31 - inputComponent) << 12) * mixParam) >> 16
+	lsr r0, r0, #16
+	lsr r4, r4, #16
+	lsr r5, r5, #16
+
+	// put input components back together
+	lsl r4, r4, #5
+	lsl r5, r5, #10
+	orr r0, r4
+	orr r0, r5 // r0 = new 15bit color
+
+	// add original color to new 15bit color
+	mov r5, r8
+	add r0, r5, r0
+	mov pc, lr
+	thumb_func_end sub_3005FC0
+
+	thumb_local_start
+// input:
+// r1 - red mix param
+// r2 - green mix param
+// r3 - blue mix param
+// r5 - input palette color
+sub_3005FFA:
+	mov r8, r5
+
+	// get input red
+	lsl r0, r5, #27
+	lsr r0, r0, #27
+
+	// get input green
+	lsl r4, r5, #22
+	lsr r4, r4, #27
+
+	// get input blue
+	lsl r5, r5, #17
+	lsr r5, r5, #27
+
+	// shift input components
+	lsl r0, r0, #12
+	lsl r4, r4, #12
+	lsl r5, r5, #12
+	// inputComponent = (inputComponent << 12) * mixParam
+	mul r0, r1
+	mul r4, r2
+	mul r5, r3
+	// inputComponent = ((inputComponent << 12) * mixParam) >> 16
+	lsr r0, r0, #16
+	lsr r4, r4, #16
+	lsr r5, r5, #16
+
+	// put input components back together
+	lsl r4, r4, #5
+	lsl r5, r5, #10
+	orr r0, r4
+	orr r0, r5 // r0 = new 15bit color
+
+	// subtract original color with new 15bit color
+	mov r5, r8
+	sub r0, r5, r0
+	mov pc, lr
+	thumb_func_end sub_3005FFA
 
 	thumb_func_start sub_3006028
 sub_3006028:

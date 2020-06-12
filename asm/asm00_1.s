@@ -5701,15 +5701,20 @@ loc_8006276:
 	str r0, [r5,#0x10]
 	ldr r0, [r2,#oFadeParams_Ptr_04]
 	str r0, [r5,#0x14]
+
 	ldrb r0, [r2,#oFadeParams_Unk_0c]
 	strh r0, [r5,#0x18]
+
 	ldrb r0, [r2,#oFadeParams_Unk_0d]
 	strh r0, [r5,#0x1c]
+
 	ldrb r0, [r2,#oFadeParams_Unk_0e]
 	strh r0, [r5,#8]
+
 	ldrb r0, [r2,#oFadeParams_Unk_0f]
 	lsl r0, r0, #4
 	strh r0, [r5,#0xa]
+
 	mov r0, #1
 	strb r0, [r5]
 	mov r0, #1
@@ -5843,6 +5848,10 @@ sub_800634C:
 	thumb_func_end sub_800634C
 
 	thumb_local_start
+// unk0c -> 0x18 -> num palettes for 1st mix
+// unk0d -> 0x1c -> num palettes for 2nd mix
+// unk0e -> 8 -> index + 0x12
+// unk0f << 4 -> 0xa -> relating to iterations
 sub_8006366:
 	push {r4-r7,lr}
 	ldrh r1, [r5,#6]

@@ -897,7 +897,7 @@ sprite_setAlpha:
 	sub r0, #0x10
 	neg r0, r0
 	strb r0, [r3,#3]
-	mov r0, #0
+	mov r0, #0 // change to 0x40 to enable alpha blending
 	strb r0, [r3]
 	mov r0, #0x3f
 	strb r0, [r3,#1]

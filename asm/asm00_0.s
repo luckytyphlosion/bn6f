@@ -4383,6 +4383,11 @@ off_8002374: .word 0x108
 	thumb_func_end zeroFill_e20097A0
 
 	thumb_func_start sub_8002378
+// r0 - mix type
+// r1 - param
+// r2 - num palettes
+// r3 - index
+// r4 - dest palette ptr
 sub_8002378:
 	push {r5-r7,lr}
 	ldr r7, off_8002464 // =ePalette20097a0
