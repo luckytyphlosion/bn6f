@@ -5122,7 +5122,7 @@ char *__fastcall __noreturn sub_80071D4(int a1, int a2, int a3, int a4)
     int v50; // r3
 
     v5 = a1;
-    ZeroFillByWord(dword_2033000, 27296);
+    ZeroFillByWord(eBattleFolderTemp, 27296);
     ZeroFillByWord(&unk_2039ADC, 12804);
     ZeroFillByWord(byte_203CDA8, sub_3258);
     SetPrimaryToolkitPointersWrapper();
@@ -10909,21 +10909,21 @@ void __fastcall sub_800A570(__int16 *a1, int a2, int a3)
     do
     {
         if ( *(getChip8021DA8(*v4 & 0x1FF) + offsetof(ChipData, elemIdx)) == 2 )
-            word_2033040[v6++] = *v4;
+            eBattleFolderTempGigas[v6++] = *v4;
         else
-            *(dword_2033000 + v5++) = *v4;
+            *(eBattleFolderTemp + v5++) = *v4;
         ++v4;
         ++v7;
     }
     while ( v7 < 30 );
-    v8 = dword_2033000;
+    v8 = eBattleFolderTemp;
     v9 = v5;
     if ( v5 )
     {
         v10 = v5;
         if ( v20 )
         {
-            v8 = dword_2033000 + 2;
+            v8 = eBattleFolderTemp + 2;
             v9 = v5 - 1;
             v10 = v5 - 1;
         }
@@ -10932,11 +10932,11 @@ void __fastcall sub_800A570(__int16 *a1, int a2, int a3)
             v9 -= 2;
             v10 -= 2;
         }
-        sub_8000D12(v8, v9, v10);
+        ShuffleFolderSlice(v8, v9, v10);
     }
     if ( v6 )
     {
-        sub_8000D12(word_2033040, v6, v6);
+        ShuffleFolderSlice(eBattleFolderTempGigas, v6, v6);
         if ( sub_802D234() == 1 )
         {
             v16 = 0;
@@ -10944,7 +10944,7 @@ void __fastcall sub_800A570(__int16 *a1, int a2, int a3)
             {
                 GetPositiveSignedRNG1();
                 __asm { SVC         6 }
-                v5 = sub_800A672(dword_2033000, v5, word_2033040[v16++], 19);
+                v5 = sub_800A672(eBattleFolderTemp, v5, eBattleFolderTempGigas[v16++], 19);
             }
             while ( v16 < v6 );
         }
@@ -10955,7 +10955,7 @@ void __fastcall sub_800A570(__int16 *a1, int a2, int a3)
             {
                 GetPositiveSignedRNG1();
                 __asm { SVC         6 }
-                v5 = sub_800A672(dword_2033000, v5, word_2033040[v11++], v5 - 2);
+                v5 = sub_800A672(eBattleFolderTemp, v5, eBattleFolderTempGigas[v11++], v5 - 2);
             }
             while ( v11 < v6 );
         }
@@ -10972,7 +10972,7 @@ void __fastcall sub_800A570(__int16 *a1, int a2, int a3)
         word_203303A = word_203302A;
         word_203302A = v18;
     }
-    CopyHalfwords(dword_2033000, v19, 60);
+    CopyHalfwords(eBattleFolderTemp, v19, 60);
 }
 
 

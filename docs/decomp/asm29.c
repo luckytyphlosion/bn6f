@@ -8131,7 +8131,7 @@ char *__fastcall sub_80AABA4(int a1)
             {
                 v3 = v2[5];
                 v4 = 2 * *(&v23 + v3);
-                *(&dword_2033000[64 * v3] + v4) = v1;
+                *(&eBattleFolderTemp[64 * v3] + v4) = v1;
                 *(&v23 + v3) = (v4 >> 1) + 1;
             }
         }
@@ -8165,7 +8165,7 @@ char *__fastcall sub_80AABA4(int a1)
     v22 = v5;
     GetPositiveSignedRNG2();
     __asm { SVC         6 }
-    v11 = &dword_2033000[64 * v22];
+    v11 = &eBattleFolderTemp[64 * v22];
     v12 = 2 * *(&v22 + v22 + 4);
     v13 = *(v11 + v12);
     v24 = *(v11 + v12);
@@ -8294,7 +8294,7 @@ int __fastcall sub_80AAD04(int a1, int a2)
     v10 = 0;
     do
     {
-        if ( *(&dword_2033000[3 * v5] + v10) )
+        if ( *(&eBattleFolderTemp[3 * v5] + v10) )
         {
             *v8 = v10;
             v8 = (v8 + 1);
@@ -8371,7 +8371,7 @@ signed int sub_80AADA6()
         --v2;
     }
     while ( v2 );
-    CopyWords(v0[0x13], dword_2033000, &loc_F00);
+    CopyWords(v0[0x13], eBattleFolderTemp, &loc_F00);
     v3 = v0[0x12];
     v4 = 30 * *(v0[oToolkit_S2011c50_Ptr] + 5);
     do
@@ -8382,7 +8382,7 @@ signed int sub_80AADA6()
     }
     while ( v4 );
     v5 = 0;
-    v6 = dword_2033000;
+    v6 = eBattleFolderTemp;
     do
     {
         v7 = getChip8021DA8(v5);

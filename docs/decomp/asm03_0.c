@@ -4153,8 +4153,8 @@ int __fastcall sub_8029110(int a1, int a2, int a3, int a4)
     int v29; // [sp-4h] [bp-14h]
 
     *(v4 + 11) = 20;
-    ZeroFillByWord(dword_2033000, 72);
-    v6 = dword_2033000;
+    ZeroFillByWord(eBattleFolderTemp, 72);
+    v6 = eBattleFolderTemp;
     v7 = &byte_20366C0;
     v8 = 6;
     do
@@ -4166,7 +4166,7 @@ int __fastcall sub_8029110(int a1, int a2, int a3, int a4)
         --v8;
     }
     while ( v8 );
-    v9 = dword_2033000;
+    v9 = eBattleFolderTemp;
     v10 = *(v4 + 8);
     if ( *(v4 + 8) )
     {
@@ -4214,7 +4214,7 @@ int __fastcall sub_8029110(int a1, int a2, int a3, int a4)
         }
         sub_8029224();
     }
-    v21 = dword_2033000;
+    v21 = eBattleFolderTemp;
     v22 = &byte_20366C0;
     v23 = byte_20366FE;
     v24 = 0;
@@ -4257,7 +4257,7 @@ int sub_8029224()
     int v10; // r0
     signed int v11; // [sp-4h] [bp-14h]
 
-    for ( i = (dword_2033000 + 2); ; ++i )
+    for ( i = (eBattleFolderTemp + 2); ; ++i )
     {
         result = *i;
         if ( result == -1 )
@@ -4334,10 +4334,10 @@ int __fastcall sub_80292CC(int a1, int a2, int a3)
     _WORD *v9; // r4
     int result; // r0
 
-    v4 = (dword_2033000 + a2);
-    v5 = (dword_2033000 + 2 * a3 + a2);
+    v4 = (eBattleFolderTemp + a2);
+    v5 = (eBattleFolderTemp + 2 * a3 + a2);
     v6 = a3 - 1;
-    *(dword_2033000 + a2) = a1;
+    *(eBattleFolderTemp + a2) = a1;
     v7 = a1;
     v4[6] = sub_80109A4(a1, *(*(v3 + oToolkit_S2034880_Ptr) + 13));
     v4[18] = *(getChip8021DA8(v7) + 6);
@@ -4371,7 +4371,7 @@ int __fastcall sub_8029328(int a1, int a2, int a3)
     _WORD *v3; // r4
     int result; // r0
 
-    v3 = (&dword_2033000[15] + a2);
+    v3 = (&eBattleFolderTemp[15] + a2);
     result = 0;
     do
     {
@@ -4799,7 +4799,7 @@ char *__fastcall sub_8029688(int a1, int a2, int a3)
     v5 = *(v4 + oToolkit_S2034880_Ptr);
     if ( *(v5 + 68) )
         v24 = *(v5 + 69);
-    v6 = dword_2033000;
+    v6 = eBattleFolderTemp;
     v7 = byte_203CDB0;
     v8 = *(v3 + 6);
     if ( *(v3 + 6) )
@@ -4853,8 +4853,8 @@ char *__fastcall sub_8029688(int a1, int a2, int a3)
     }
     if ( a3 )
     {
-        v14 = dword_2033000;
-        sub_8000D12(dword_2033000, a3, a3);
+        v14 = eBattleFolderTemp;
+        ShuffleFolderSlice(eBattleFolderTemp, a3, a3);
         v16 = *(v3 + 6);
         if ( *(v3 + 6) )
         {
@@ -4990,10 +4990,10 @@ void sub_8029788()
         if ( byte_80298C8[v7] )
         {
             v12 = byte_80298C8[v7];
-            sub_8000D12(word_2036660, v7, v7);
+            ShuffleFolderSlice(word_2036660, v7, v7);
             v11 = v12;
         }
-        sub_8000D12(&word_2036660[v11], v15 - v11, v15 - v11);
+        ShuffleFolderSlice(&word_2036660[v11], v15 - v11, v15 - v11);
     }
 }
 

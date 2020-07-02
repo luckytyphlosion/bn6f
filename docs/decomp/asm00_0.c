@@ -837,7 +837,7 @@ void __fastcall sub_8000CDA(int a1, int a2, int a3)
 
 
 // 0x8000d12
-void __fastcall sub_8000D12(int result, int a2, int a3)
+void __fastcall ShuffleFolderSlice(int result, int a2, int a3)
 {
     int v3; // ST08_4
     int v4; // ST0C_4

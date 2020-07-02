@@ -10642,7 +10642,7 @@ sub_80AABA4:
 	str r4, [sp,#4]
 	str r4, [sp,#8]
 	ldr r5, off_80AAC78 // =unk_2036750 
-	ldr r6, off_80AAC80 // =dword_2033000 
+	ldr r6, off_80AAC80 // =eBattleFolderTemp 
 loc_80AABB8:
 	lsr r0, r4, #3
 	ldrb r0, [r5,r0]
@@ -10750,7 +10750,7 @@ loc_80AAC72:
 	.balign 4, 0
 off_80AAC78: .word unk_2036750
 off_80AAC7C: .word 0x140
-off_80AAC80: .word dword_2033000
+off_80AAC80: .word eBattleFolderTemp
 	.word 0x2201
 off_80AAC88: .word 0x201
 	thumb_func_end sub_80AABA4
@@ -10846,7 +10846,7 @@ loc_80AAD26:
 loc_80AAD30:
 	str r0, [sp]
 	str r5, [sp,#4]
-	ldr r6, off_80AAE74 // =dword_2033000 
+	ldr r6, off_80AAE74 // =eBattleFolderTemp 
 	mov r0, #0xc
 	mul r0, r5
 	add r6, r6, r0
@@ -10934,7 +10934,7 @@ loc_80AADB6:
 	bne loc_80AADB6
 	mov r0, r10
 	ldr r0, [r0,#oToolkit_Unk2002230_Ptr]
-	ldr r1, off_80AAE7C // =dword_2033000 
+	ldr r1, off_80AAE7C // =eBattleFolderTemp 
 	ldr r2, off_80AAE80 // =0xf00 
 	bl CopyWords // (u32 *src, u32 *dest, int size) -> void
 	mov r0, r10
@@ -10955,7 +10955,7 @@ loc_80AADE4:
 	sub r4, #1
 	bne loc_80AADE4
 	mov r4, #0
-	ldr r7, off_80AAE84 // =dword_2033000 
+	ldr r7, off_80AAE84 // =eBattleFolderTemp 
 loc_80AADFC:
 	// idx
 	mov r0, r4
@@ -11025,11 +11025,11 @@ locret_80AAE68:
 	.balign 4, 0
 off_80AAE6C: .word dword_203300C
 off_80AAE70: .word 0x140
-off_80AAE74: .word dword_2033000
+off_80AAE74: .word eBattleFolderTemp
 off_80AAE78: .word dword_203300C
-off_80AAE7C: .word dword_2033000
+off_80AAE7C: .word eBattleFolderTemp
 off_80AAE80: .word 0xF00
-off_80AAE84: .word dword_2033000
+off_80AAE84: .word eBattleFolderTemp
 dword_80AAE88: .word 0x137
 off_80AAE8C: .word 0x138
 off_80AAE90: .word 0x139

@@ -484,7 +484,7 @@ sub_80029A8:
 	ldr r5, off_8002BF0 // =byte_200DCA0
 	ldr r1, [r5,#0x4c] // (dword_200DCEC - 0x200dca0)
 	ldr r4, off_8002BC0 // =SpritePointersList
-	ldr r6, off_8002BC8 // =dword_2033000
+	ldr r6, off_8002BC8 // =eBattleFolderTemp
 	mov r7, r0
 loc_80029BC:
 	ldrb r0, [r7]
@@ -589,7 +589,7 @@ sub_8002A64:
 	ldr r5, off_8002BF0 // =byte_200DCA0
 	ldr r1, [r5,#0x4c] // (dword_200DCEC - 0x200dca0)
 	ldr r4, off_8002BC0 // =SpritePointersList
-	ldr r6, off_8002BC8 // =dword_2033000
+	ldr r6, off_8002BC8 // =eBattleFolderTemp
 	lsl r2, r0, #0x18
 	lsr r2, r2, #0x16
 	lsr r3, r0, #8
@@ -703,7 +703,7 @@ sprite_decompress:
 	bl sub_8002BCC
 	ldr r1, [r5,#0x4c] // (dword_200DCEC - 0x200dca0)
 	ldr r4, off_8002BC0 // =SpritePointersList
-	ldr r6, off_8002BC8 // =dword_2033000
+	ldr r6, off_8002BC8 // =eBattleFolderTemp
 	mov r3, r5
 	add r3, #4
 	mov r9, r1
@@ -768,7 +768,7 @@ loc_8002BB2:
 	.balign 4, 0
 off_8002BC0: .word SpritePointersList
 dword_8002BC4: .word 0x2040000
-off_8002BC8: .word dword_2033000
+off_8002BC8: .word eBattleFolderTemp
 	thumb_func_end sprite_decompress
 
 	thumb_local_start

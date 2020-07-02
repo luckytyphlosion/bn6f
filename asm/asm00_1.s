@@ -7547,7 +7547,7 @@ sub_80071D4:
 	mov r7, #0
 	push {r0}
 	// memBlock
-	ldr r0, off_8007320 // =dword_2033000
+	ldr r0, off_8007320 // =eBattleFolderTemp
 	// size
 	ldr r1, Word_8007324 // =0x6aa0
 	bl ZeroFillByWord // (void *memBlock, int size) -> void
@@ -7672,9 +7672,9 @@ off_8007308: .word dword_2036820
 off_800730C: .word eCamera+0x4C // eCamera.unk_4C
 off_8007310: .word dword_20364C0
 Word_8007314: .word 0x6014000
-	.word dword_2033000
+	.word eBattleFolderTemp
 	.word 0xD000
-off_8007320: .word dword_2033000
+off_8007320: .word eBattleFolderTemp
 Word_8007324: .word 0x6AA0
 off_8007328: .word unk_2039ADC
 off_800732C: .word eNaviStats203CCE0
@@ -14279,73 +14279,78 @@ off_800A56C: .word unk_2039AA0
 	thumb_func_end sub_800A540
 
 	thumb_local_start
+
+	.set oStack_BattleFolder, 0x0
+	.set oStack_FolderReg, 0x4
+	.set oStack_FolderTag, 0x8
+
 // eBattleFolder = some buffer
 sub_800A570: // shuffle folder
 	push {r4-r7,lr}
 	sub sp, sp, #0xc
-	str r0, [sp]
-	str r1, [sp,#4]
-	str r2, [sp,#8]
+	str r0, [sp,#oStack_BattleFolder]
+	str r1, [sp,#oStack_FolderReg]
+	str r2, [sp,#oStack_FolderTag]
 	mov r7, r0
 	mov r5, #0
 	mov r6, #0
 	mov r4, #0
-loc_800A582:
+.writeChipsToBufferLoop
 	ldrh r0, [r7]
 	lsl r0, r0, #0x17
 	lsr r0, r0, #0x17
 	bl getChip8021DA8 // (int chip_idx) -> ChipData*
 	ldrb r1, [r0,#0x7] // ChipData.elemIdx
 	cmp r1, #2 // giga
-	beq loc_800A59E
+	beq .isGiga
 	add r1, r5, r5
 	ldr r2, off_800A910 // =dword_2033000not giga
 	ldrh r0, [r7]
 	strh r0, [r2,r1]
 	add r5, #1
-	b loc_800A5A8
-loc_800A59E:
+	b .wroteChipToBuffer
+.isGiga
 	add r1, r6, r6
 	ldr r2, off_800A914 // =word_2033040gigas
 	ldrh r0, [r7]
 	strh r0, [r2,r1]
 	add r6, #1
-loc_800A5A8:
+.wroteChipToBuffer
 	add r7, #2
 	add r4, #1
-	cmp r4, #0x1e
-	blt loc_800A582
-	ldr r0, off_800A918 // =dword_2033000
+	cmp r4, #30
+	blt .writeChipsToBufferLoop
+	ldr r0, off_800A918 // =eBattleFolderTemp
 	mov r1, r5 // r5 = num non-gigas
-	beq loc_800A5D2
+	beq .noNonGigas
 	mov r2, r5
-	ldr r3, [sp,#4]
+	ldr r3, [sp,#oStack_FolderReg]
 	tst r3, r3
-	beq loc_800A5C4
-	ldr r0, dword_800A91C // =dword_2033000+2
+	beq .noReg
+	ldr r0, dword_800A91C // =eBattleFolderTemp+2
 // reg?
 	sub r1, #1
 	sub r2, #1
-loc_800A5C4:
-	ldr r3, [sp,#8]
+.noReg
+	ldr r3, [sp,#oStack_FolderTag]
 	tst r3, r3
-	beq loc_800A5CE
+	beq .noTag
 // tag?
 	sub r1, #2
 	sub r2, #2
-loc_800A5CE:
-	bl sub_8000D12
-loc_800A5D2:
-	ldr r0, off_800A920 // =word_2033040
+.noTag
+	bl ShuffleFolderSlice
+.noNonGigas
+	ldr r0, off_800A920 // =eBattleFolderTempGigas
 	mov r1, r6 // num gigas
-	beq loc_800A634
+	beq .noGigas
 	mov r2, r6
-	bl sub_8000D12
+	bl ShuffleFolderSlice
 	bl GetBattleMode
 	cmp r0, #1 // crossover
-	beq loc_800A610
+	beq .isCrossover
 	mov r4, #0
-loc_800A5E8:
+.insertGigasLoop
 // r5 = chips in main shuffled folder
 	bl GetPositiveSignedRNG1
 	mov r1, #0xc
@@ -14354,10 +14359,10 @@ loc_800A5E8:
 	svc 6
 	mov r3, #0xa
 	add r3, r3, r1
-	ldr r0, off_800A924 // =dword_2033000
+	ldr r0, off_800A924 // =eBattleFolderTemp
 	mov r1, r5
 	add r2, r4, r4
-	ldr r7, off_800A928 // =word_2033040
+	ldr r7, off_800A928 // =eBattleFolderTempGigas
 	ldrh r2, [r7,r2]
 // r0 = main shuffled folder ptr
 // r1 = main shuffled folder len
@@ -14367,32 +14372,32 @@ loc_800A5E8:
 	mov r5, r0
 	add r4, #1
 	cmp r4, r6
-	blt loc_800A5E8
-	b loc_800A634
-loc_800A610:
+	blt .insertGigasLoop
+	b .noGigas
+.isCrossover
 	mov r4, #0
-loc_800A612:
+.loc_800A612:
 	bl GetPositiveSignedRNG1
 	mov r1, #0xb
 	svc 6
 	mov r3, #8
 	add r3, r3, r1
-	ldr r0, off_800A92C // =dword_2033000
+	ldr r0, off_800A92C // =eBattleFolderTemp
 	mov r1, r5
 	add r2, r4, r4
-	ldr r7, off_800A930 // =word_2033040
+	ldr r7, off_800A930 // =eBattleFolderTempGigas
 	ldrh r2, [r7,r2]
 	bl sub_800A672
 	mov r5, r0
 	add r4, #1
 	cmp r4, r6
-	blt loc_800A612
-loc_800A634:
-	ldr r0, [sp,#8]
+	blt .loc_800A612
+.noGigas
+	ldr r0, [sp,#oStack_FolderTag]
 	tst r0, r0
-	beq loc_800A664
+	beq .doNotInsertTag
 	bl GetPositiveSignedRNG1
-	mov r1, #0x13
+	mov r1, #19
 	svc 6
 	mov r0, #1
 	add r1, r1, r0
@@ -14401,7 +14406,7 @@ loc_800A634:
 	mov r2, #0x45
 	strb r1, [r3,r2]
 	lsl r1, r1, #1
-	ldr r0, off_800A934 // =dword_2033000
+	ldr r0, off_800A934 // =eBattleFolderTemp
 	ldrh r3, [r0,#0x38] // (word_2033038 - 0x2033000)
 	ldrh r4, [r0,r1]
 	strh r4, [r0,#0x38] // (word_2033038 - 0x2033000)
@@ -14411,9 +14416,9 @@ loc_800A634:
 	ldrh r4, [r0,r1]
 	strh r4, [r0,#0x3a] // (word_203303A - 0x2033000)
 	strh r3, [r0,r1]
-loc_800A664:
+.doNotInsertTag
 	// src
-	ldr r0, off_800A938 // =dword_2033000
+	ldr r0, off_800A938 // =eBattleFolderTemp
 	// dest
 	ldr r1, [sp]
 	// halfwordCount
@@ -14866,17 +14871,17 @@ sub_800A908:
 	ldr r1, off_800A950 // =dword_2000B30
 	str r0, [r1]
 	mov pc, lr
-off_800A910: .word dword_2033000
-off_800A914: .word word_2033040
-off_800A918: .word dword_2033000
-dword_800A91C: .word dword_2033000+2
-off_800A920: .word word_2033040
-off_800A924: .word dword_2033000
-off_800A928: .word word_2033040
-off_800A92C: .word dword_2033000
-off_800A930: .word word_2033040
-off_800A934: .word dword_2033000
-off_800A938: .word dword_2033000
+off_800A910: .word eBattleFolderTemp
+off_800A914: .word eBattleFolderTempGigas
+off_800A918: .word eBattleFolderTemp
+dword_800A91C: .word eBattleFolderTemp+2
+off_800A920: .word eBattleFolderTempGigas
+off_800A924: .word eBattleFolderTemp
+off_800A928: .word eBattleFolderTempGigas
+off_800A92C: .word eBattleFolderTemp
+off_800A930: .word eBattleFolderTempGigas
+off_800A934: .word eBattleFolderTemp
+off_800A938: .word eBattleFolderTemp
 dword_800A93C: .word 0x8C9F
 off_800A940: .word battleSettingsList0
 off_800A944: .word BattleSettingsList1

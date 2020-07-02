@@ -1156,26 +1156,34 @@ loc_8000CDC:
 	pop {r4-r6,pc}
 	thumb_func_end sub_8000CDA
 
-	thumb_func_start sub_8000D12
-sub_8000D12:
+	thumb_func_start ShuffleFolderSlice
+// r0 - folder source
+// r1 - slice length to shuffle
+// r2 - slice length to shuffle, also loop counter
+ShuffleFolderSlice:
 	push {r4-r6,lr}
-loc_8000D14:
+.loop
 	push {r0,r2}
+
 	push {r1}
 	bl GetPositiveSignedRNG1
 	pop {r1}
+
 	push {r1}
 	svc 6
-	mov r3, r1
+	mov r3, r1 // swap index 1
 	pop {r1}
+
 	push {r1,r3}
 	bl GetPositiveSignedRNG1
 	pop {r1}
 	push {r1}
 	svc 6
-	mov r4, r1
+	mov r4, r1 // swap index 2
 	pop {r1,r3}
+
 	pop {r0,r2}
+
 	add r3, r3, r3
 	add r4, r4, r4
 	ldrh r5, [r0,r3]
@@ -1183,9 +1191,9 @@ loc_8000D14:
 	strh r6, [r0,r3]
 	strh r5, [r0,r4]
 	sub r2, #1
-	bne loc_8000D14
+	bne .loop
 	pop {r4-r6,pc}
-	thumb_func_end sub_8000D12
+	thumb_func_end ShuffleFolderSlice
 
 	thumb_local_start
 sub_8000D4A:

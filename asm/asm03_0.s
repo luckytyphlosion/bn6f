@@ -5566,11 +5566,11 @@ sub_8029110:
 	mov r0, #0x14
 	strb r0, [r5,#0xb]
 	// memBlock
-	ldr r0, off_80293D4 // =dword_2033000 
+	ldr r0, off_80293D4 // =eBattleFolderTemp 
 	// size
 	mov r1, #0x48 
 	bl ZeroFillByWord // (void *memBlock, int size) -> void
-	ldr r4, off_80293D4 // =dword_2033000 
+	ldr r4, off_80293D4 // =eBattleFolderTemp 
 	ldr r6, off_80293CC // =byte_20366C0 
 	mov r3, #6
 	mov r0, #0
@@ -5582,7 +5582,7 @@ loc_8029128:
 	add r6, #2
 	sub r3, #1
 	bne loc_8029128
-	ldr r4, off_80293D4 // =dword_2033000 
+	ldr r4, off_80293D4 // =eBattleFolderTemp 
 	ldrb r7, [r5,#8]
 	cmp r7, #0
 	beq loc_80291E6
@@ -5668,7 +5668,7 @@ loc_80291AC:
 loc_80291E2:
 	bl sub_8029224
 loc_80291E6:
-	ldr r2, off_80293D4 // =dword_2033000 
+	ldr r2, off_80293D4 // =eBattleFolderTemp 
 	ldr r6, off_80293CC // =byte_20366C0 
 	ldr r4, off_80293D0 // =byte_20366FE 
 	mov r0, #0
@@ -5706,7 +5706,7 @@ loc_8029202:
 	thumb_local_start
 sub_8029224:
 	push {r4,r6,r7,lr}
-	ldr r4, off_80293D4 // =dword_2033000 
+	ldr r4, off_80293D4 // =eBattleFolderTemp 
 	add r4, #2
 	mov r7, #0
 	sub r7, #1
@@ -5805,7 +5805,7 @@ locret_80292CA:
 	thumb_local_start
 sub_80292CC:
 	push {r4,r6,r7,lr}
-	ldr r4, off_80293D4 // =dword_2033000 
+	ldr r4, off_80293D4 // =eBattleFolderTemp 
 	add r4, r4, r1
 	lsl r3, r2, #1
 	add r6, r4, r3
@@ -5855,7 +5855,7 @@ loc_802930E:
 	thumb_local_start
 sub_8029328:
 	push {r4,lr}
-	ldr r4, off_80293D4 // =dword_2033000 
+	ldr r4, off_80293D4 // =eBattleFolderTemp 
 	add r4, r4, r1
 	add r4, #0x3c 
 	mov r3, #0xfe
@@ -5949,7 +5949,7 @@ sub_80293B0:
 	.balign 4, 0
 off_80293CC: .word byte_20366C0
 off_80293D0: .word byte_20366FE
-off_80293D4: .word dword_2033000
+off_80293D4: .word eBattleFolderTemp
 off_80293D8: .word 0x190
 	.word byte_20349C0
 dword_80293E0: .word 0xC
@@ -6366,7 +6366,7 @@ sub_8029688:
 	ldrb r0, [r1,r0]
 	str r0, [sp]
 loc_80296A2:
-	ldr r7, off_8029784 // =dword_2033000 
+	ldr r7, off_8029784 // =eBattleFolderTemp 
 	ldr r6, off_80298D4 // =eBattleFolder 
 	ldrb r4, [r5,#6]
 	cmp r4, #0
@@ -6428,10 +6428,10 @@ loc_802970A:
 loc_802970C:
 	cmp r2, #0
 	beq loc_802977E
-	ldr r0, off_8029784 // =dword_2033000 
+	ldr r0, off_8029784 // =eBattleFolderTemp 
 	mov r7, r0
 	mov r1, r2
-	bl sub_8000D12
+	bl ShuffleFolderSlice
 	ldrb r4, [r5,#6]
 	cmp r4, #0
 	beq loc_8029750
@@ -6492,7 +6492,7 @@ loc_802977E:
 	add sp, sp, #4
 	pop {r4,r6,r7,pc}
 	.balign 4, 0
-off_8029784: .word dword_2033000
+off_8029784: .word eBattleFolderTemp
 	thumb_func_end sub_8029688
 
 	thumb_local_start
@@ -6583,7 +6583,7 @@ loc_802980E:
 	mov r1, r4
 	mov r2, r4
 	push {r3}
-	bl sub_8000D12
+	bl ShuffleFolderSlice
 	pop {r3}
 loc_802982A:
 	pop {r0,r2}
@@ -6591,7 +6591,7 @@ loc_802982A:
 	lsl r3, r3, #1
 	add r0, r0, r3
 	mov r1, r2
-	bl sub_8000D12
+	bl ShuffleFolderSlice
 loc_8029838:
 	add sp, sp, #4
 	pop {r4,r6,r7,pc}

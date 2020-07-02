@@ -2509,7 +2509,7 @@ unk_2032A04:: // 0x2032a04
 	.space 764
 unk_2032D00:: // 0x2032d00
 	.space 768
-dword_2033000:: // 0x2033000
+eBattleFolderTemp:: // 0x2033000
 	.space 4
 word_2033004:: // 0x2033004
 	.space 2
@@ -2543,7 +2543,7 @@ word_203303C:: // 0x203303c
 	.space 2
 word_203303E:: // 0x203303e
 	.space 2
-word_2033040:: // 0x2033040
+eBattleFolderTempGigas:: // 0x2033040
 	.space 2
 word_2033042:: // 0x2033042
 	.space 958
